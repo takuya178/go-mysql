@@ -11,15 +11,12 @@ import (
 )
 
 func NewDB() *gorm.DB {
-	if os.Getenv("GO_ENV") == "dev" {
 		err := godotenv.Load()
 		if err != nil {
 			log.Printf("Failed to godotenv: %v", err)
 		}
-	}
 
 	dsn := os.Getenv("DB_USERNAME") + ":" + os.Getenv("DB_PASSWORD") + "@tcp(" + os.Getenv("DB_HOST") + ":3306)/" + os.Getenv("DB_DATABASE") + "?parseTime=true&loc=Local"
-
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		log.Fatalf("Failed to connect to MySQL: %v", err)
