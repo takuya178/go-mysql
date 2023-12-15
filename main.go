@@ -12,8 +12,6 @@ import (
 )
 
 func main() {
-	fmt.Println("hello")
-
 	db := db.NewDB()
 	userRepository := repository.NewUserRepository(db)
 	userUsecase := usecase.NewUserUsecase(userRepository)
