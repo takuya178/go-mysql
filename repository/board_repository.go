@@ -27,8 +27,8 @@ func (tr *boardRepository) GetAllBoards(boards *[]model.Board, userId uint) erro
 	query := `
 		SELECT *
 		FROM boards AS b
-		INNER JOIN users u ON b.user_id = u.di
-		WHERE u.id = ?
+		INNER JOIN users u ON b.user_id = u.id
+		WHERE b.id = ?
 		ORDER BY b.created_at
 	`
 	if err := tr.db.Raw(query, userId).Scan(&boards).Error; err != nil {

@@ -14,9 +14,12 @@ import (
 func main() {
 	db := db.NewDB()
 	userRepository := repository.NewUserRepository(db)
+	boardRepository := repository.NewTaskRepository(db)
 	userUsecase := usecase.NewUserUsecase(userRepository)
+	boardUsecase := usecase.NewBoardUsecase(boardRepository)
 	userController := controller.NewUserController(userUsecase)
-	r := router.NewRouter(userController)
+	boardController := controller.NewBoardController(boardUsecase)
+	r := router.NewRouter(userController, boardController)
 
 	serverAddr := ":8080"
 	fmt.Printf("Server is listening on %s...\n", serverAddr)
